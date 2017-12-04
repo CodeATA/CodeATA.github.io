@@ -20,7 +20,17 @@ class Spider(scrapy.Spider):
 
     def parse(self, response):
         shop_id = re.match(r'.*\&id=(.*)', response.url).group(1)
-        
-        price = response.xpath('//strong[@id="J_StrPrice"]/em[@class="tb-rmb-num"]/text()').extract()[0]
+        page = shop_id+'.html'
+        with open(page, 'wb') as page_file:
+            page_file.write(response.body)
+
+        ori_price = response.xpath('//li[@id="J_StrPriceModBox"]//em[@class="tb-rmb-num"]/text()').extract()[0]
+        promo_price_list = response.xpath('//li[@id="J_PromoPrice"]//em[@id="J_PromoPriceNum"]/text()').extract()
+        if promo_price_list:
+            price = promo_price_list[0]
+            print("\npromo!\n")
+        else:
+            price = ori_price
         with open("a.out", "a") as f:
             f.write(shop_id+','+price+'\n')
+        

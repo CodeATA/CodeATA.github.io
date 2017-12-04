@@ -13,6 +13,7 @@ shops = {'530539251218':'欧石晶坊',
          '549931060579':'业务君的小店',
          '526391288719':'柯基家',}
 row = {'date':'',
+       'time':'',
        '欧石晶坊':'',
        '黑兔充值':'',
        '手游专业充值平台':'',
@@ -29,5 +30,16 @@ with open('a.out', 'r') as price_file:
 today = datetime.datetime.now()
 date = today.strftime('%Y-%m-%d')
 time = today.strftime('%H:%M:%S')
-print(date)
-print(time)
+
+row['date'] = date
+row['time'] = time
+
+with open('fgo-price.csv', 'a', newline='') as csvfile:
+    fieldnames=['date', 'time', '欧石晶坊', '黑兔充值', '手游专业充值平台', '小埋小店果冻君小店', '老狼手游充值', '业务君的小店', '柯基家']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writerow(row)
+
+
+
+
+
