@@ -18,7 +18,7 @@ class Spider(scrapy.Spider):
 
     def start_requests(self):    
         for url in self.urls:
-            yield scrapy_splah.SplashRequest(url=url, callback=self.parse,
+            yield scrapy_splash.SplashRequest(url=url, callback=self.parse,
                 args={'wait':0.5,}
             )
 
