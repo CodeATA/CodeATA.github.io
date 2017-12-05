@@ -19,7 +19,7 @@ class Spider(scrapy.Spider):
     def start_requests(self):    
         for url in self.urls:
             yield scrapy_splash.SplashRequest(url=url, callback=self.parse,
-                args={'wait':0.5,}
+                args={'wait':10,}
             )
 
     def parse(self, response):
@@ -32,7 +32,7 @@ class Spider(scrapy.Spider):
         promo_price_list = response.xpath('//li[@id="J_PromoPrice"]//em[@id="J_PromoPriceNum"]/text()').extract()
         if promo_price_list:
             price = promo_price_list[0]
-            print("\npromo!\n")
+            #print("\npromo!\n")
         else:
             price = ori_price
         with open("a.out", "a") as f:
