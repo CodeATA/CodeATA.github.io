@@ -18,7 +18,9 @@ class Spider(scrapy.Spider):
 
     def start_requests(self):    
         for url in self.urls:
-            yield scrapy_splah.SplashRequest(url=url, callback=self.parse)
+            yield scrapy_splah.SplashRequest(url=url, callback=self.parse,
+                args={'wait':0.5,}
+            )
 
     def parse(self, response):
         shop_id = re.match(r'.*\&id=(.*)', response.url).group(1)
