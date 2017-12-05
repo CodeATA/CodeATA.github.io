@@ -6,7 +6,7 @@ spider_dir=$rt_dir/recharge
 cd $spider_dir
 scrapy crawl tb_recharge
 mv $spider_dir/a.out $rt_dir
-$rt_dir/update_csv.py
+$rt_dir/update_csv.py $rt_dir
 rm $rt_dir/a.out
 
 timestamp=$(date +"%Y-%m-%d %H:%m:%S")
