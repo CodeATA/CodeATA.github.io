@@ -2,6 +2,8 @@
 
 import scrapy
 import re
+import scrapy_splash 
+
 
 class Spider(scrapy.Spider):
     name = "tb_recharge"
@@ -16,13 +18,13 @@ class Spider(scrapy.Spider):
 
     def start_requests(self):    
         for url in self.urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+            yield scrapy_splah.SplashRequest(url=url, callback=self.parse)
 
     def parse(self, response):
         shop_id = re.match(r'.*\&id=(.*)', response.url).group(1)
-        page = shop_id+'.html'
-        with open(page, 'wb') as page_file:
-            page_file.write(response.body)
+        #page = shop_id+'.html'
+        #with open(page, 'wb') as page_file:
+        #    page_file.write(response.body)
 
         ori_price = response.xpath('//li[@id="J_StrPriceModBox"]//em[@class="tb-rmb-num"]/text()').extract()[0]
         promo_price_list = response.xpath('//li[@id="J_PromoPrice"]//em[@id="J_PromoPriceNum"]/text()').extract()
