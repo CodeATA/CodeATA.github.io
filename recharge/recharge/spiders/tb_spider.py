@@ -3,7 +3,9 @@
 import scrapy
 import re
 import scrapy_splash 
-
+import datetime
+import sys
+import os
 
 class Spider(scrapy.Spider):
     name = "tb_recharge"
@@ -14,9 +16,15 @@ class Spider(scrapy.Spider):
             'https://item.taobao.com/item.htm?spm=a230r.1.14.32.448e0757ptgTZM&id=543831356367',
             'https://item.taobao.com/item.htm?spm=a230r.1.14.38.448e0757ptgTZM&id=549931060579',
             'https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-7398620829.21.5304a160Xh4s20&id=526391288719',]
+    out_num = 1
 
 
-    def start_requests(self):    
+    def start_requests(self):
+        while (True):
+            if not (os.path.exists(str(self.out_num)+'.out')):
+                break
+            else:
+                self.out_num += 1
         for url in self.urls:
             yield scrapy_splash.SplashRequest(url=url, callback=self.parse,
                 args={'wait':10,}
@@ -35,6 +43,6 @@ class Spider(scrapy.Spider):
             #print("\npromo!\n")
         else:
             price = ori_price
-        with open("a.out", "a") as f:
+        with open(str(self.out_num)+'.out', "a") as f:
             f.write(shop_id+','+price+'\n')
         
