@@ -27,14 +27,14 @@ class Spider(scrapy.Spider):
         #        self.out_num += 1
         for url in self.urls:
             yield scrapy_splash.SplashRequest(url=url, callback=self.parse,
-                args={'wait':10,}
+                args={'wait':0.5,}
             )
 
     def parse(self, response):
         shop_id = re.match(r'.*\&id=(.*)', response.url).group(1)
-        #page = shop_id+'.html'
-        #with open(page, 'wb') as page_file:
-        #    page_file.write(response.body)
+        page = shop_id+'.html'
+        with open(page, 'wb') as page_file:
+            page_file.write(response.body)
 
         ori_price = response.xpath('//li[@id="J_StrPriceModBox"]//em[@class="tb-rmb-num"]/text()').extract()[0]
         promo_price_list = response.xpath('//li[@id="J_PromoPrice"]//em[@id="J_PromoPriceNum"]/text()').extract()
