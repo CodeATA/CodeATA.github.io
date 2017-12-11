@@ -16,4 +16,4 @@ cd $rt_dir
 echo $timestamp >> test.txt
 #git commit -a -m "$timestamp update"
 git commit -a -m "test crontab git"
-#git push
+git push
