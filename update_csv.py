@@ -24,8 +24,8 @@ row = {'date':'',
        '柯基家':'',}
 
 rt_dir = sys.argv[1]
-price_name = rt_dir+'a.out'
-csv_name = rt_dir+'fgo-price.csv'
+price_name = rt_dir+'/a.out'
+csv_name = rt_dir+'/fgo-price.csv'
 
 with open(price_name, 'r') as price_file:
     for line in price_file:
