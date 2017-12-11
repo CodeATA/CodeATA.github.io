@@ -20,11 +20,11 @@ class Spider(scrapy.Spider):
 
 
     def start_requests(self):
-        while (True):
-            if not (os.path.exists(str(self.out_num)+'.out')):
-                break
-            else:
-                self.out_num += 1
+        #while (True):
+        #    if not (os.path.exists(str(self.out_num)+'.out')):
+        #        break
+        #    else:
+        #        self.out_num += 1
         for url in self.urls:
             yield scrapy_splash.SplashRequest(url=url, callback=self.parse,
                 args={'wait':10,}
@@ -43,6 +43,7 @@ class Spider(scrapy.Spider):
             #print("\npromo!\n")
         else:
             price = ori_price
-        with open(str(self.out_num)+'.out', "a") as f:
+        #with open(str(self.out_num)+'.out', "a") as f:
+        with open('a.out', "a") as f:
             f.write(shop_id+','+price+'\n')
         
