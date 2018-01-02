@@ -4,6 +4,9 @@ rt_dir=/root/CodeATA.github.io
 spider_dir=$rt_dir/recharge
 
 cd $spider_dir
+
+git pull
+
 /usr/local/bin/scrapy crawl tb_recharge
 mv $spider_dir/a.out $rt_dir
 $rt_dir/update_csv.py $rt_dir
